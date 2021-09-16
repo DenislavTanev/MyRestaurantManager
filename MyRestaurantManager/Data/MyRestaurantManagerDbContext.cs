@@ -28,6 +28,12 @@
 
         public DbSet<Table> Tables { get; init; }
 
+        public DbSet<Restaurant> Restaurants { get; init; }
+
+        public DbSet<Menu> Menus { get; init; }
+
+        public DbSet<MenuSection> MenuSections { get; init; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

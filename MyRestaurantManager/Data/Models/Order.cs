@@ -1,22 +1,32 @@
 ﻿namespace MyRestaurantManager.Data.Models
 {
-    using MyRestaurantManager.Data.Common;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
-    public class Order : BaseModel<int>
+    using MyRestaurantManager.Data.Common;
+
+    public class Order : BaseModel<string>
     {
+        public Order()
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.DishesOrdered = new HashSet<Dish>();
+            this.DrinksOrdered = new HashSet<Drink>();
+        }
+
         public int OrderNumber { get; set; }
 
-        public int TableId { get; set; }
+        public string TableId { get; set; }
 
         public Table Table { get; set; }
 
-        public IEnumerable<Dish> DishesOrdered { get; init; } = new List<Dish>();
+        public string RestaurantId { get; set; }
 
-        public IEnumerable<Drink> DrinksOrdered { get; init; } = new List<Drink>();
+        public Restaurant Restaurant { get; set; }
+
+        public ICollection<Dish> DishesOrdered { get; set; }
+
+        public ICollection<Drink> DrinksOrdered { get; set; }
 
         public DateTime OrderClosed { get; set; }
     }

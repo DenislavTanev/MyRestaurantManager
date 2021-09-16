@@ -1,24 +1,31 @@
 ﻿namespace MyRestaurantManager.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
     using MyRestaurantManager.Data.Common;
 
-    public class Dish : BaseDeletableModel<int>
+    public class Dish : BaseDeletableModel<string>
     {
+        public Dish()
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.Ingredients = new HashSet<Ingredient>();
+        }
+
         public string Name { get; set; }
 
         public string PortionQuantity { get; set; }
 
         public decimal Price { get; set; }
 
-        public int TypeId { get; set; }
+        public string TypeId { get; set; }
 
         public DishType Type { get; set; }
 
-        public IEnumerable<Ingredient> Ingredients { get; init; } = new List<Ingredient>();
+        public ICollection<Ingredient> Ingredients { get; set; }
 
-        public int ImageId { get; set; }
+        public string ImageId { get; set; }
 
         public Image Image { get; set; }
     }

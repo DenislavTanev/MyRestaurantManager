@@ -1,15 +1,24 @@
 ﻿namespace MyRestaurantManager.Data.Models
 {
-    using MyRestaurantManager.Data.Common;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
-    public class Table : BaseDeletableModel<int>
+    using MyRestaurantManager.Data.Common;
+
+    public class Table : BaseDeletableModel<string>
     {
+        public Table()
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.Orders = new HashSet<Order>();
+        }
+
         public int Number { get; set; }
 
-        public IEnumerable<Order> Orders { get; init; } = new List<Order>();
+        public ICollection<Order> Orders { get; set; }
+
+        public string RestaurantId { get; set; }
+
+        public Restaurant Restaurant { get; set; }
     }
 }

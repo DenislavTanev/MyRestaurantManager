@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyRestaurantManager.Data;
 
-namespace MyRestaurantManager.Data.Migrations
+namespace MyRestaurantManager.Migrations
 {
     [DbContext(typeof(MyRestaurantManagerDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210916182103_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,11 +23,11 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("DishIngredient", b =>
                 {
-                    b.Property<int>("DishesId")
-                        .HasColumnType("int");
+                    b.Property<string>("DishesId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IngredientsId")
-                        .HasColumnType("int");
+                    b.Property<string>("IngredientsId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("DishesId", "IngredientsId");
 
@@ -236,10 +238,8 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Dish", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -247,11 +247,14 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("MenuSectionId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -259,8 +262,8 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PortionQuantity")
                         .HasColumnType("nvarchar(max)");
@@ -268,10 +271,12 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("TypeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuSectionId");
 
                     b.HasIndex("OrderId");
 
@@ -282,10 +287,8 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.DishType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -303,10 +306,8 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Drink", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -314,11 +315,14 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("MenuSectionId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -326,8 +330,8 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -335,10 +339,12 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<string>("Quantity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("TypeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuSectionId");
 
                     b.HasIndex("OrderId");
 
@@ -349,10 +355,8 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.DrinkType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -370,10 +374,8 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Image", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -381,11 +383,11 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
+                    b.Property<string>("DishId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DrinkId")
-                        .HasColumnType("int");
+                    b.Property<string>("DrinkId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<byte[]>("Img")
                         .HasColumnType("varbinary(max)");
@@ -396,23 +398,28 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DishId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DishId] IS NOT NULL");
 
                     b.HasIndex("DrinkId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DrinkId] IS NOT NULL");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Ingredient", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -434,12 +441,77 @@ namespace MyRestaurantManager.Data.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Menu", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.MenuSection", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DishTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DrinkTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MenuId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DishTypeId");
+
+                    b.HasIndex("DrinkTypeId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("MenuSections");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -453,22 +525,53 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TableId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.HasIndex("TableId");
 
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Restaurant", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Restaurants");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -485,7 +588,12 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Tables");
                 });
@@ -558,30 +666,34 @@ namespace MyRestaurantManager.Data.Migrations
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Dish", b =>
                 {
+                    b.HasOne("MyRestaurantManager.Data.Models.MenuSection", null)
+                        .WithMany("Dishes")
+                        .HasForeignKey("MenuSectionId");
+
                     b.HasOne("MyRestaurantManager.Data.Models.Order", null)
                         .WithMany("DishesOrdered")
                         .HasForeignKey("OrderId");
 
                     b.HasOne("MyRestaurantManager.Data.Models.DishType", "Type")
                         .WithMany("Dishes")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeId");
 
                     b.Navigation("Type");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Drink", b =>
                 {
+                    b.HasOne("MyRestaurantManager.Data.Models.MenuSection", null)
+                        .WithMany("Drinks")
+                        .HasForeignKey("MenuSectionId");
+
                     b.HasOne("MyRestaurantManager.Data.Models.Order", null)
                         .WithMany("DrinksOrdered")
                         .HasForeignKey("OrderId");
 
                     b.HasOne("MyRestaurantManager.Data.Models.DrinkType", "Type")
                         .WithMany("Drinks")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeId");
 
                     b.Navigation("Type");
                 });
@@ -590,30 +702,75 @@ namespace MyRestaurantManager.Data.Migrations
                 {
                     b.HasOne("MyRestaurantManager.Data.Models.Dish", "Dish")
                         .WithOne("Image")
-                        .HasForeignKey("MyRestaurantManager.Data.Models.Image", "DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MyRestaurantManager.Data.Models.Image", "DishId");
 
                     b.HasOne("MyRestaurantManager.Data.Models.Drink", "Drink")
                         .WithOne("Image")
-                        .HasForeignKey("MyRestaurantManager.Data.Models.Image", "DrinkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MyRestaurantManager.Data.Models.Image", "DrinkId");
+
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithMany("Images")
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Dish");
 
                     b.Navigation("Drink");
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Menu", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithMany("Menus")
+                        .HasForeignKey("RestaurantId");
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.MenuSection", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.DishType", "DishType")
+                        .WithMany()
+                        .HasForeignKey("DishTypeId");
+
+                    b.HasOne("MyRestaurantManager.Data.Models.DrinkType", "DrinkType")
+                        .WithMany()
+                        .HasForeignKey("DrinkTypeId");
+
+                    b.HasOne("MyRestaurantManager.Data.Models.Menu", "Menu")
+                        .WithMany("Sections")
+                        .HasForeignKey("MenuId");
+
+                    b.Navigation("DishType");
+
+                    b.Navigation("DrinkType");
+
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Order", b =>
                 {
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithMany("Orders")
+                        .HasForeignKey("RestaurantId");
+
                     b.HasOne("MyRestaurantManager.Data.Models.Table", "Table")
                         .WithMany("Orders")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TableId");
+
+                    b.Navigation("Restaurant");
 
                     b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithMany("Tables")
+                        .HasForeignKey("RestaurantId");
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Dish", b =>
@@ -636,11 +793,34 @@ namespace MyRestaurantManager.Data.Migrations
                     b.Navigation("Drinks");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Menu", b =>
+                {
+                    b.Navigation("Sections");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.MenuSection", b =>
+                {
+                    b.Navigation("Dishes");
+
+                    b.Navigation("Drinks");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Order", b =>
                 {
                     b.Navigation("DishesOrdered");
 
                     b.Navigation("DrinksOrdered");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Restaurant", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("Menus");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Tables");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>
