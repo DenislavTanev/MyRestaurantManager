@@ -12,27 +12,27 @@
         {
         }
 
-        public DbSet<Dish> Dishes { get; init; }
+        public DbSet<Dish> Dishes { get; set; }
 
-        public DbSet<DishType> DishTypes { get; init; }
+        public DbSet<DishType> DishTypes { get; set; }
 
-        public DbSet<Drink> Drinks { get; init; }
+        public DbSet<Drink> Drinks { get; set; }
 
-        public DbSet<DrinkType> DrinkTypes { get; init; }
+        public DbSet<DrinkType> DrinkTypes { get; set; }
 
-        public DbSet<Image> Images { get; init; }
+        public DbSet<Image> Images { get; set; }
 
-        public DbSet<Ingredient> Ingredients { get; init; }
+        public DbSet<Ingredient> Ingredients { get; set; }
 
-        public DbSet<Order> Orders { get; init; }
+        public DbSet<Order> Orders { get; set; }
 
-        public DbSet<Table> Tables { get; init; }
+        public DbSet<Table> Tables { get; set; }
 
-        public DbSet<Restaurant> Restaurants { get; init; }
+        public DbSet<Restaurant> Restaurants { get; set; }
 
-        public DbSet<Menu> Menus { get; init; }
+        public DbSet<Menu> Menus { get; set; }
 
-        public DbSet<MenuSection> MenuSections { get; init; }
+        public DbSet<MenuSection> MenuSections { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -28,5 +28,7 @@
         public string ImageId { get; set; }
 
         public Image Image { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }
