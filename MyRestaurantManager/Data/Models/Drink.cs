@@ -24,5 +24,9 @@
         public string ImageId { get; set; }
 
         public Image Image { get; set; }
+
+        public string RestaurantId { get; set; }
+
+        public Restaurant Restaurant { get; set; }
     }
 }

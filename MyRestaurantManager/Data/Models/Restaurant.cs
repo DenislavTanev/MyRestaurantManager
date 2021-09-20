@@ -15,6 +15,8 @@
             this.Menus = new HashSet<Menu>();
             this.Orders = new HashSet<Order>();
             this.Tables = new HashSet<Table>();
+            this.Dishes = new HashSet<Dish>();
+            this.Drinks = new HashSet<Drink>();
         }
 
         public string Name { get; set; }
@@ -28,5 +30,9 @@
         public ICollection<Order> Orders { get; set; }
 
         public ICollection<Table> Tables { get; set; }
+
+        public ICollection<Dish> Dishes { get; set; }
+
+        public ICollection<Drink> Drinks { get; set; }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model MyRestaurantManager.ViewModels.DishTypes.DishTypeCreateInputModel
+
+<div>
+    <form method="post" asp-controller="DishTypes" asp-action="Create">
+        <div class="form-group was-validated">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" placeholder="Name..." />
+        </div>
+        <button type="submit" class="btn btn-success btn-user btn-block">Create</button>
+    </form>
+</div>

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyRestaurantManager.Services.Models
+﻿namespace MyRestaurantManager.Services.Models
 {
+    using System.Collections.Generic;
+
     public class DishDetailsServiceModel
     {
         public string Id { get; set; }

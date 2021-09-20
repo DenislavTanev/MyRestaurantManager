@@ -8,6 +8,8 @@ namespace MyRestaurantManager
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using MyRestaurantManager.Data;
+    using MyRestaurantManager.Services.Interfaces;
+    using MyRestaurantManager.Services.Services;
 
     public class Startup
     {
@@ -37,6 +39,9 @@ namespace MyRestaurantManager
 
             services
                 .AddControllersWithViews();
+
+            services.AddTransient<IDishTypesService, DishTypesService>();
+            services.AddTransient<IDishesService, DishesService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

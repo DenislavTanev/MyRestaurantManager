@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyRestaurantManager.Data;
 
 namespace MyRestaurantManager.Migrations
 {
     [DbContext(typeof(MyRestaurantManagerDbContext))]
-    partial class MyRestaurantManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210920163038_AddIsDeletedToDishType")]
+    partial class AddIsDeletedToDishType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

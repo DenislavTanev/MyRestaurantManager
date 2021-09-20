@@ -30,5 +30,9 @@
         public Image Image { get; set; }
 
         public bool IsAvailable { get; set; }
+
+        public string RestaurantId { get; set; }
+
+        public Restaurant Restaurant { get; set; }
     }
 }

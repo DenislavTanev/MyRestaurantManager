@@ -5,7 +5,7 @@
 
     using MyRestaurantManager.Data.Common;
 
-    public class DishType : BaseModel<string>
+    public class DishType : BaseDeletableModel<string>
     {
         public DishType()
         {
