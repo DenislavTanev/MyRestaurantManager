@@ -7,7 +7,7 @@
 
     public interface IDishesService
     {
-        Task CreateAsync(DishServiceModel input);
+        Task CreateAsync(DishCreateServiceModel input);
 
         Task EditAsync(DishDetailsServiceModel input);
 

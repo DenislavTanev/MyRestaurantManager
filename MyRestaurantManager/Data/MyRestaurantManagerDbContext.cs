@@ -34,6 +34,8 @@
 
         public DbSet<MenuSection> MenuSections { get; set; }
 
+        public DbSet<DishIngredient> DishesIngredients { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder

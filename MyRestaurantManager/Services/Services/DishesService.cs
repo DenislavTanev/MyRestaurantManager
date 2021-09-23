@@ -1,14 +1,15 @@
 ﻿namespace MyRestaurantManager.Services.Services
 {
-    using Microsoft.EntityFrameworkCore;
-    using MyRestaurantManager.Data;
-    using MyRestaurantManager.Data.Models;
-    using MyRestaurantManager.Services.Interfaces;
-    using MyRestaurantManager.Services.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
+    using MyRestaurantManager.Data;
+    using MyRestaurantManager.Data.Models;
+    using MyRestaurantManager.Services.Interfaces;
+    using MyRestaurantManager.Services.Models;
 
     public class DishesService : IDishesService
     {
@@ -19,20 +20,40 @@
             _context = context;
         }
 
-        public async Task CreateAsync(DishServiceModel input)
+        public async Task CreateAsync(DishCreateServiceModel input)
         {
             var dish = new Dish
             {
                 Name = input.Name,
                 PortionQuantity = input.PortionQuantity,
                 Price = input.Price,
-                IsAvailable = false,
+                IsAvailable = true,
                 TypeId = input.Type.Id,
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false,
             };
 
-            await _context.AddAsync(dish);
+            await _context.Dishes.AddAsync(dish);
+
+            var img = new Image
+            {
+                Img = input.Image,
+                DishId = dish.Id,
+            };
+
+            foreach (var ingredient in input.Ingredients)
+            {
+                var dishIngredient = new DishIngredient
+                {
+                    DishId = dish.Id,
+                    IngredientId = ingredient.Id,
+                };
+
+                await _context.DishesIngredients.AddAsync(dishIngredient);
+            }
+
+            await _context.Images.AddAsync(img);
+
             await _context.SaveChangesAsync();
         }
 
@@ -88,8 +109,8 @@
                     },
                     Ingredients = x.Ingredients.Select(i => new IngredientServiceModel
                     {
-                        Id = i.Id,
-                        Name = i.Name,
+                        Id = i.IngredientId,
+                        Name = i.Ingredient.Name,
                     }).ToList(),
                 })
                 .FirstOrDefault();

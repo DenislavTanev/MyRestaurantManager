@@ -10,7 +10,7 @@
         public Dish()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Ingredients = new HashSet<Ingredient>();
+            this.Ingredients = new HashSet<DishIngredient>();
         }
 
         public string Name { get; set; }
@@ -23,7 +23,7 @@
 
         public DishType Type { get; set; }
 
-        public ICollection<Ingredient> Ingredients { get; set; }
+        public ICollection<DishIngredient> Ingredients { get; set; }
 
         public string ImageId { get; set; }
 

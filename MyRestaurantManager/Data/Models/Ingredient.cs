@@ -10,11 +10,11 @@
         public Ingredient()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Dishes = new HashSet<Dish>();
+            this.Dishes = new HashSet<DishIngredient>();
         }
 
         public string Name { get; set; }
 
-        public ICollection<Dish> Dishes { get; set; }
+        public ICollection<DishIngredient> Dishes { get; set; }
     }
 }
