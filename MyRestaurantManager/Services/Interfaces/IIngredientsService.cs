@@ -5,14 +5,14 @@
 
     using MyRestaurantManager.Services.Models;
 
-    public interface IDishTypesService
+    public interface IIngredientsService
     {
         Task CreateAsync(string name);
 
         Task DeleteAsync(string id);
 
-        DishTypeServiceModel GetById(string id);
+        IngredientServiceModel GetById(string id);
 
-        IEnumerable<DishTypeServiceModel> GetAll();
+        IEnumerable<IngredientServiceModel> GetAll();
     }
 }

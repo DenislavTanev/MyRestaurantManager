@@ -28,5 +28,7 @@
         public string RestaurantId { get; set; }
 
         public Restaurant Restaurant { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }

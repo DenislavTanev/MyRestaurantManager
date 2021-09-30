@@ -15,7 +15,9 @@
 
         DishDetailsServiceModel GetById(string id);
 
-        IEnumerable<DishDetailsServiceModel> GetByRestaurant(string id);
+        IEnumerable<DishDetailsServiceModel> GetByRestaurant(string restaurantId);
+
+        IEnumerable<DishDetailsServiceModel> GetByIngredient(string restaurantId, string ingredientId);
 
         IEnumerable<DishDetailsServiceModel> GetByDishType(string restaurantId, string dishTypeId);
 

@@ -5,7 +5,7 @@
 
     using MyRestaurantManager.Data.Common;
 
-    public class DrinkType : BaseModel<string>
+    public class DrinkType : BaseDeletableModel<string>
     {
         public DrinkType()
         {

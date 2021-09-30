@@ -84,7 +84,33 @@
 
         public IEnumerable<DishDetailsServiceModel> GetByDishType(string restaurantId, string dishTypeId)
         {
-            throw new NotImplementedException();
+            var dishes = _context.Dishes
+                 .Where(x => x.RestaurantId == restaurantId && x.TypeId == dishTypeId)
+                 .Select(x => new DishDetailsServiceModel
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     PortionQuantity = x.PortionQuantity,
+                     Price = x.Price,
+                     Type = new DishTypeServiceModel
+                     {
+                         Id = x.TypeId,
+                         Name = x.Type.Name
+                     },
+                     Image = new ImageServiceModel
+                     {
+                         Id = x.ImageId,
+                         Img = x.Image.Img,
+                     },
+                     Ingredients = x.Ingredients.Select(i => new IngredientServiceModel
+                     {
+                         Id = i.IngredientId,
+                         Name = i.Ingredient.Name,
+                     }).ToList(),
+                 })
+                 .ToList();
+
+            return dishes;
         }
 
         public DishDetailsServiceModel GetById(string id)
@@ -118,9 +144,66 @@
             return dish;
         }
 
-        public IEnumerable<DishDetailsServiceModel> GetByRestaurant(string id)
+        public IEnumerable<DishDetailsServiceModel> GetByIngredient(string restaurantId, string ingredientId)
         {
-            throw new NotImplementedException();
+            var dishes = _context.Dishes
+                 .Where(x => x.RestaurantId == restaurantId && x.Ingredients.Any(x => x.IngredientId == ingredientId))
+                 .Select(x => new DishDetailsServiceModel
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     PortionQuantity = x.PortionQuantity,
+                     Price = x.Price,
+                     Type = new DishTypeServiceModel
+                     {
+                         Id = x.TypeId,
+                         Name = x.Type.Name
+                     },
+                     Image = new ImageServiceModel
+                     {
+                         Id = x.ImageId,
+                         Img = x.Image.Img,
+                     },
+                     Ingredients = x.Ingredients.Select(i => new IngredientServiceModel
+                     {
+                         Id = i.IngredientId,
+                         Name = i.Ingredient.Name,
+                     }).ToList(),
+                 })
+                 .ToList();
+
+            return dishes;
+        }
+
+        public IEnumerable<DishDetailsServiceModel> GetByRestaurant(string restaurantId)
+        {
+             var dishes = _context.Dishes
+                 .Where(x => x.RestaurantId == restaurantId)
+                 .Select(x => new DishDetailsServiceModel
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     PortionQuantity = x.PortionQuantity,
+                     Price = x.Price,
+                     Type = new DishTypeServiceModel
+                     {
+                         Id = x.TypeId,
+                         Name = x.Type.Name
+                     },
+                     Image = new ImageServiceModel
+                     {
+                         Id = x.ImageId,
+                         Img = x.Image.Img,
+                     },
+                     Ingredients = x.Ingredients.Select(i => new IngredientServiceModel
+                     {
+                         Id = i.IngredientId,
+                         Name = i.Ingredient.Name,
+                     }).ToList(),
+                 })
+                 .ToList();
+
+            return dishes;
         }
 
         public async Task SetAvailabilityAsync(string id, bool availability)
