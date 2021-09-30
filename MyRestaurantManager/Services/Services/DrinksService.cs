@@ -101,10 +101,10 @@
             return drink;
         }
 
-        public IEnumerable<DrinkDetailsServiceModel> GetByRestaurant(string id)
+        public IEnumerable<DrinkDetailsServiceModel> GetByRestaurant(string restaurantId)
         {
             var drinks = _context.Drinks
-                .Where(x => x.RestaurantId == id)
+                .Where(x => x.RestaurantId == restaurantId)
                 .Select(x => new DrinkDetailsServiceModel
                 {
                     Id = x.Id,
