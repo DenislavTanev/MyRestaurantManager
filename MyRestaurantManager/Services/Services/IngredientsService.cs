@@ -11,67 +11,67 @@
     using MyRestaurantManager.Services.Interfaces;
     using MyRestaurantManager.Services.Models;
 
-    public class DrinkTypesService : IDrinkTypesService
+    public class IngredientsService : IIngredientsService
     {
         private readonly MyRestaurantManagerDbContext _context;
 
-        public DrinkTypesService(MyRestaurantManagerDbContext context)
+        public IngredientsService(MyRestaurantManagerDbContext context)
         {
             _context = context;
         }
 
         public async Task CreateAsync(string name)
         {
-            var drinkType = new DrinkType
+            var ingredient = new Ingredient
             {
                 Name = name,
                 IsDeleted = false,
                 CreatedOn = DateTime.UtcNow,
             };
 
-            await _context.AddAsync(drinkType);
+            await _context.AddAsync(ingredient);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(string id)
         {
-            var drinkType = await _context.DrinkTypes.FirstOrDefaultAsync(x => x.Id == id);
+            var ingredient = await _context.Ingredients.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (drinkType != null)
+            if (ingredient != null)
             {
-                drinkType.IsDeleted = true;
-                drinkType.DeletedOn = DateTime.UtcNow;
+                ingredient.IsDeleted = true;
+                ingredient.DeletedOn = DateTime.UtcNow;
             }
 
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<DrinkTypeServiceModel> GetAll()
+        public IEnumerable<IngredientServiceModel> GetAll()
         {
-            var drinkType = _context.DrinkTypes
+            var ingredient = _context.Ingredients
                .Where(x => x.IsDeleted != true)
-               .Select(x => new DrinkTypeServiceModel
+               .Select(x => new IngredientServiceModel
                {
                    Id = x.Id,
                    Name = x.Name,
                })
                .ToList();
 
-            return drinkType;
+            return ingredient;
         }
 
-        public DrinkTypeServiceModel GetById(string id)
+        public IngredientServiceModel GetById(string id)
         {
-            var drinkType = _context.DrinkTypes
-                .Where(x => x.Id == id)
-                .Select(x => new DrinkTypeServiceModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
-                .FirstOrDefault();
+            var ingredient = _context.Ingredients
+               .Where(x => x.IsDeleted != true)
+               .Select(x => new IngredientServiceModel
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+               })
+               .FirstOrDefault();
 
-            return drinkType;
+            return ingredient;
         }
     }
 }
