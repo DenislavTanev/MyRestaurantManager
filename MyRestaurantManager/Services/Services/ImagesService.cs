@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyRestaurantManager.Data;
-using MyRestaurantManager.Data.Models;
-using MyRestaurantManager.Services.Interfaces;
-using MyRestaurantManager.Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyRestaurantManager.Services.Services
+﻿namespace MyRestaurantManager.Services.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
+    using MyRestaurantManager.Data;
+    using MyRestaurantManager.Data.Models;
+    using MyRestaurantManager.Services.Interfaces;
+    using MyRestaurantManager.Services.Models;
+
     public class ImagesService : IImagesService
     {
         private readonly MyRestaurantManagerDbContext _context;

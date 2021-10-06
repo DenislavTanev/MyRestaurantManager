@@ -5,14 +5,18 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using System.Threading.Tasks;
 
 namespace MyRestaurantManager
 {
     public class Program
     {
-        public static void Main(string[] args) 
-            => CreateHostBuilder(args).Build().Run();
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run(); 
+        }
+
 
         public static IHostBuilder CreateHostBuilder(string[] args)
             => Host
