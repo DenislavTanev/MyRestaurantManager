@@ -74,10 +74,13 @@
         {
             var dish = await _context.Dishes.FirstOrDefaultAsync(x => x.Id == input.Id);
 
-            dish.Name = input.Name;
-            dish.PortionQuantity = input.PortionQuantity;
-            dish.Price = input.Price;
-            dish.ModifiedOn = DateTime.UtcNow;
+            if (dish.IsDeleted == false)
+            {
+                dish.Name = input.Name;
+                dish.PortionQuantity = input.PortionQuantity;
+                dish.Price = input.Price;
+                dish.ModifiedOn = DateTime.UtcNow;
+            }
 
             await _context.SaveChangesAsync();
         }

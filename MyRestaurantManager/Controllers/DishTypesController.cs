@@ -17,6 +17,20 @@ namespace MyRestaurantManager.Controllers
             this.dishTypesService = dishTypesService;
         }
 
+        public IActionResult Index()
+        {
+            var dishTypes = dishTypesService
+                .GetAll()
+                .Select(e => new DishTypesViewModel
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                })
+                .ToList();
+
+            return this.View(dishTypes);
+        }
+
         public IActionResult Create()
         {
             return this.View();
@@ -28,6 +42,18 @@ namespace MyRestaurantManager.Controllers
             await dishTypesService.CreateAsync(input.Name);
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var dishType = dishTypesService.GetById(id);
+
+            if (dishType != null)
+            {
+                await dishTypesService.DeleteAsync(id);
+            };
+
+            return this.RedirectToAction("Index", "DishTypes");
         }
     }
 }

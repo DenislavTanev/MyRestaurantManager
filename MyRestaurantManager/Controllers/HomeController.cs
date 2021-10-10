@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyRestaurantManager.Models;
+using MyRestaurantManager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +20,7 @@ namespace MyRestaurantManager.Controllers
         }
 
         public IActionResult Index()
-        {
+        {      
             return View();
         }
 

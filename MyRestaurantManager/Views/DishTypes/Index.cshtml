@@ -1,0 +1,26 @@
+﻿@model List<MyRestaurantManager.ViewModels.DishTypes.DishTypesViewModel>
+
+@foreach (var dishType in Model)
+{
+    <div class="container row">
+        <div class="col">
+            @dishType.Name
+            <a class="col btn-danger rounded border-dark container" asp-action="Delete" asp-controller="DishTypes" asp-route-Id="@dishType.Id">Delete</a>
+        </div>
+
+    </div>
+
+    
+}
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @foreach (var dT in Model)
+        {
+        <a class="dropdown-item" href="#">@dT.Name</a>
+        }
+    </div>
+</div>

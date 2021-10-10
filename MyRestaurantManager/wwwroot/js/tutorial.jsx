@@ -1,9 +1,11 @@
-﻿class CommentBox extends React.Component {
-    render() {
-        return (
-            <div className="commentBox">Hello, world! I am a CommentBox.</div>
-        );
+﻿function getData(e) {
+    class CommentBox extends React.Component {
+        render() {
+            return (
+                <div className="commentBox">e.firstName, || e.lastName</div>
+            );
+        }
     }
-}
 
-ReactDOM.render(<CommentBox />, document.getElementById('content'));
+    ReactDOM.render(<CommentBox />, document.getElementById('content'));
+}
