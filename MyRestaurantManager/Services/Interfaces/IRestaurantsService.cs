@@ -8,13 +8,13 @@ namespace MyRestaurantManager.Services.Interfaces
 {
     public interface IRestaurantsService
     {
-        Task CreateAsync(RestaurantServiceModel input);
+        Task<string> CreateAsync(string name, int stars, string userId);
 
         Task EditAsync(RestaurantServiceModel input);
 
-        Task DeleteAsync(string id);
+        Task DeleteAsync(string restaurantId, string userId);
 
-        RestaurantServiceModel GetById(string id);
+        RestaurantServiceModel GetById(string restaurantId);
 
     }
 }

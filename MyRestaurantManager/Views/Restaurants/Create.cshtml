@@ -1,0 +1,27 @@
+﻿@model MyRestaurantManager.ViewModels.Restaurants.RestaurantCreateInputModel
+
+@{
+    this.ViewData["Title"] = "Create Restaurant";
+}
+
+<div class="p-4">
+    <div class="text-center">
+        <h1 class="text-black-50">Create Restaurant!</h1>
+    </div>
+    <form class="user text-center text-white-50" method="post">
+        <div class="form-group was-validated">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control form-control-user text-center" placeholder="Title" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group was-validated">
+            <label asp-for="Stars"></label>
+            <textarea asp-for="Stars" class="form-control" rows="5" required></textarea>
+            <span asp-validation-for="Stars" class="text-danger"></span>
+        </div>
+        <hr />
+        <button type="submit" class="btn btn-success btn-user btn-block">
+            Create
+        </button>
+    </form>
+</div>

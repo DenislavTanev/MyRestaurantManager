@@ -34,5 +34,13 @@
         public ICollection<Dish> Dishes { get; set; }
 
         public ICollection<Drink> Drinks { get; set; }
+
+        public string OwnerId { get; set; }
+
+        public User Owner { get; set; }
+
+        public string StaffId { get; set; }
+
+        public RestaurantStaff Staff { get; set; }
     }
 }

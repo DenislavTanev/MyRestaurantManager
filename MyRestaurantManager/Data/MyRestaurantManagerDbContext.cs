@@ -5,7 +5,7 @@
 
     using MyRestaurantManager.Data.Models;
 
-    public class MyRestaurantManagerDbContext : IdentityDbContext
+    public class MyRestaurantManagerDbContext : IdentityDbContext<User>
     {
         public MyRestaurantManagerDbContext(DbContextOptions<MyRestaurantManagerDbContext> options)
             : base(options)
@@ -36,6 +36,8 @@
 
         public DbSet<DishIngredient> DishesIngredients { get; set; }
 
+        public DbSet<RestaurantStaff> Staffs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -49,6 +51,19 @@
                .HasOne(x => x.Image)
                .WithOne(x => x.Drink)
                .HasForeignKey<Image>(x => x.DrinkId);
+
+            builder
+                .Entity<Restaurant>()
+                .HasOne(x => x.Owner)
+                .WithOne(x => x.Restaurant)
+                .HasForeignKey<User>(x => x.RestaurantId);
+
+            builder
+                .Entity<Restaurant>()
+                .HasOne(x => x.Staff)
+                .WithOne(x => x.Restaurant)
+                .HasForeignKey<RestaurantStaff>(x => x.RestaurantId);
+            
 
             base.OnModelCreating(builder);
         }

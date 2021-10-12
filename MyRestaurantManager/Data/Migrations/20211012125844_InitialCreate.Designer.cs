@@ -10,8 +10,8 @@ using MyRestaurantManager.Data;
 namespace MyRestaurantManager.Migrations
 {
     [DbContext(typeof(MyRestaurantManagerDbContext))]
-    [Migration("20210920145807_AddDishesAndDrinksToRestaurant")]
-    partial class AddDishesAndDrinksToRestaurant
+    [Migration("20211012125844_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace MyRestaurantManager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DishIngredient", b =>
-                {
-                    b.Property<string>("DishesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IngredientsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DishesId", "IngredientsId");
-
-                    b.HasIndex("IngredientsId");
-
-                    b.ToTable("DishIngredient");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -85,71 +70,6 @@ namespace MyRestaurantManager.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -293,6 +213,38 @@ namespace MyRestaurantManager.Migrations
                     b.ToTable("Dishes");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.DishIngredient", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DishId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IngredientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DishId");
+
+                    b.HasIndex("IngredientId");
+
+                    b.ToTable("DishesIngredients");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.DishType", b =>
                 {
                     b.Property<string>("Id")
@@ -300,6 +252,12 @@ namespace MyRestaurantManager.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -325,6 +283,9 @@ namespace MyRestaurantManager.Migrations
 
                     b.Property<string>("ImageId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -373,6 +334,12 @@ namespace MyRestaurantManager.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -573,12 +540,41 @@ namespace MyRestaurantManager.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StaffId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Stars")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.RestaurantStaff", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId")
+                        .IsUnique()
+                        .HasFilter("[RestaurantId] IS NOT NULL");
+
+                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>
@@ -611,19 +607,87 @@ namespace MyRestaurantManager.Migrations
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("DishIngredient", b =>
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.User", b =>
                 {
-                    b.HasOne("MyRestaurantManager.Data.Models.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("MyRestaurantManager.Data.Models.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RestaurantId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RestaurantStaffId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StaffId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RestaurantId")
+                        .IsUnique()
+                        .HasFilter("[RestaurantId] IS NOT NULL");
+
+                    b.HasIndex("RestaurantStaffId");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -637,7 +701,7 @@ namespace MyRestaurantManager.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MyRestaurantManager.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -646,7 +710,7 @@ namespace MyRestaurantManager.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MyRestaurantManager.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -661,7 +725,7 @@ namespace MyRestaurantManager.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MyRestaurantManager.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -670,7 +734,7 @@ namespace MyRestaurantManager.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MyRestaurantManager.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -698,6 +762,21 @@ namespace MyRestaurantManager.Migrations
                     b.Navigation("Restaurant");
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.DishIngredient", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.Dish", "Dish")
+                        .WithMany("Ingredients")
+                        .HasForeignKey("DishId");
+
+                    b.HasOne("MyRestaurantManager.Data.Models.Ingredient", "Ingredient")
+                        .WithMany("Dishes")
+                        .HasForeignKey("IngredientId");
+
+                    b.Navigation("Dish");
+
+                    b.Navigation("Ingredient");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Drink", b =>
@@ -789,6 +868,15 @@ namespace MyRestaurantManager.Migrations
                     b.Navigation("Table");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.RestaurantStaff", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithOne("Staff")
+                        .HasForeignKey("MyRestaurantManager.Data.Models.RestaurantStaff", "RestaurantId");
+
+                    b.Navigation("Restaurant");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>
                 {
                     b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
@@ -798,9 +886,26 @@ namespace MyRestaurantManager.Migrations
                     b.Navigation("Restaurant");
                 });
 
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.User", b =>
+                {
+                    b.HasOne("MyRestaurantManager.Data.Models.Restaurant", "Restaurant")
+                        .WithOne("Owner")
+                        .HasForeignKey("MyRestaurantManager.Data.Models.User", "RestaurantId");
+
+                    b.HasOne("MyRestaurantManager.Data.Models.RestaurantStaff", "RestaurantStaff")
+                        .WithMany("Staff")
+                        .HasForeignKey("RestaurantStaffId");
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("RestaurantStaff");
+                });
+
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Dish", b =>
                 {
                     b.Navigation("Image");
+
+                    b.Navigation("Ingredients");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.DishType", b =>
@@ -816,6 +921,11 @@ namespace MyRestaurantManager.Migrations
             modelBuilder.Entity("MyRestaurantManager.Data.Models.DrinkType", b =>
                 {
                     b.Navigation("Drinks");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.Ingredient", b =>
+                {
+                    b.Navigation("Dishes");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Menu", b =>
@@ -849,7 +959,16 @@ namespace MyRestaurantManager.Migrations
 
                     b.Navigation("Orders");
 
+                    b.Navigation("Owner");
+
+                    b.Navigation("Staff");
+
                     b.Navigation("Tables");
+                });
+
+            modelBuilder.Entity("MyRestaurantManager.Data.Models.RestaurantStaff", b =>
+                {
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("MyRestaurantManager.Data.Models.Table", b =>

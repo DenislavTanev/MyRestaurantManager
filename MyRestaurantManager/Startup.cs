@@ -14,6 +14,7 @@ namespace MyRestaurantManager
     using MyRestaurantManager.Data;
     using MyRestaurantManager.Services.Interfaces;
     using MyRestaurantManager.Services.Services;
+    using MyRestaurantManager.Data.Models;
 
     public class Startup
     {
@@ -31,7 +32,7 @@ namespace MyRestaurantManager
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<IdentityUser>(options => 
+                .AddDefaultIdentity<User>(options => 
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
@@ -53,6 +54,13 @@ namespace MyRestaurantManager
 
             services.AddTransient<IDishTypesService, DishTypesService>();
             services.AddTransient<IDishesService, DishesService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IDrinksService, DrinksService>();
+            services.AddTransient<IDrinkTypesService, DrinkTypesService>();
+            services.AddTransient<IImagesService, ImagesService>();
+            services.AddTransient<ITablesService, TablesService>();
+            services.AddTransient<IRestaurantsService, RestaurantsService>();
+            services.AddTransient<IIngredientsService, IngredientsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
